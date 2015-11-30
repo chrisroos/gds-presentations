@@ -1,3 +1,19 @@
+# Smart Answers
+
+---
+
+# Who are we?
+
+---
+
+![fit](gfr-logo.png)
+
+---
+
+# James Mead & Chris Roos
+
+---
+
 # What we were asked to do
 
 * Reduce maintenance cost of Smart Answers
@@ -38,6 +54,22 @@
 
 ## Editing ERB templates
 
+```
+vat-payment-deadlines
+├── vat_payment_deadlines.govspeak.erb
+├── questions
+│   ├── how_do_you_want_to_pay.govspeak.erb
+│   └── when_does_your_vat_accounting_period_end.govspeak.erb
+└── outcomes
+    ├── result_bacs_direct_credit.govspeak.erb
+    ├── result_bank_giro.govspeak.erb
+    ├── result_chaps.govspeak.erb
+    ├── result_cheque.govspeak.erb
+    ├── result_direct_debit.govspeak.erb
+    ├── result_online_debit_credit_card.govspeak.erb
+    └── result_online_telephone_banking.govspeak.erb
+```
+
 ^
 * Directory structure
 
@@ -58,12 +90,14 @@
 
 # What we'd do next
 
+---
+
 ## Improve FCO Smart Answers
 
 ^
 * Sorry!
 * These are some of the most painful Smart Answers due to the number of countries/territories and the frequency of changes to the rules
-* We might investigate country specific outcome pages
+* Reorganize templates & partials e.g. investigate country-specific outcome pages
 
 ---
 
@@ -87,7 +121,7 @@
 
 ---
 
-## Improve content team workflow
+## Improve workflow for Content Team
 
 ^
 * Currently:
@@ -122,6 +156,11 @@
 
 ^
 * Mostly focussed on reducing the amount of developer time required to maintain Smart Answers
-* Hopefully that has a knock on benefit to the content team
-* Publishing workflow for Smart Answers is still someway off
+* Hopefully that has a knock on benefit to the Content Team
+* Although we've made progress towards it, a publishing workflow for Smart Answers is still some way off
 * If you have any questions after we've gone then please do get in touch - we're keen to see this project succeed
+
+## Pub?
+
+^
+* We'll be at the Princess Louise from 5pm
