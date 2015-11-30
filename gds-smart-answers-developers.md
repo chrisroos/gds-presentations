@@ -1,18 +1,52 @@
-# Who we are
-
-James Mead and Chris Roos
-
-Go Free Range Ltd
+# Smart Answers
 
 ---
 
-# What are Smart Answers
-
-* TODO: Demonstrate real smart answer
+# Who are we?
 
 ---
 
-# What we were asked to do
+![fit](gfr-logo.png)
+
+---
+
+# James Mead & Chris Roos
+
+## @floehopper & @chrisroos
+
+---
+
+# What are Smart Answers?
+
+---
+
+## Landing page
+
+---
+
+![fit](landlord-immigration-check-landing-page.png)
+
+---
+
+## Question page
+
+---
+
+![fit](landlord-immigration-check-question-page.png)
+
+---
+
+## Outcome page
+
+---
+
+![fit](landlord-immigration-check-outcome-page.png)
+
+---
+
+# What were we asked to do?
+
+---
 
 * Reduce maintenance cost of Smart Answers
   * Developer time
@@ -21,7 +55,7 @@ Go Free Range Ltd
 
 ---
 
-# How we approached the problem
+# How did we approach the problem?
 
 ---
 
@@ -40,8 +74,16 @@ We investigated the four ways of building them
 ## Simple Smart Answers
 
 * Created in Publisher
-* Stored in Content store - TODO: Where are these stored?
-* Rendered through Frontend
+* Read from Content API
+* Rendered by Frontend
+
+^
+* Created in Publisher
+  * Written to MongoDB via govuk_content_models
+* Read from Content API
+  * Frontend reads from MongoDB via gds-api-adapters & govuk_content_api
+* Rendered by Frontend
+  * Frontend processes responses and renders question/outcome pages
 
 ---
 
@@ -52,8 +94,9 @@ We investigated the four ways of building them
 
 * Disadvantages
   * Very limited functionality
-  * Multiple representations of Smart Answer
-  * UI divergence
+  * Implementation spread over multiple apps/libs
+  * Complex code in Publisher
+  * UI divergence in Frontend
 
 ^
 * Very limited functionality
@@ -61,13 +104,16 @@ We investigated the four ways of building them
   * Routing can only depend on latest response
   * No calculations
   * No country questions
-* Two representations of Smart Answer
-  * Code in Publisher app
-  * Code in Frontend app
-  * TODO: Are there 3 places? GDS adaptors Gem? Content API?
-* Code quality
-  * Javascript in Publisher - no unit tests? TODO: Investigate this.
-  * Inappropriate use of inheritance in Publisher
+* Implementation spread over multiple apps/libs
+  * publisher -> govuk_content_models -> mongodb
+    * SimpleSmartAnswerEdition, SSAE::Node, SSAE::Node::Option
+  * frontend <- gds-api-adapters <- govuk_content_api <- mongodb
+    * SimpleSmartAnswersController
+    * SimpleSmartAnswers::Flow, SSA::Node, SSA::State
+* Complex code in Publisher
+  * Single EditionsController for all formats (inherited_resources)
+  * Combination of nested_form (forked), formtastic-bootstrap, formtastic & custom JS
+  * No unit tests for JS, only integration tests (capybara/poltergeist/phantomjs)
 
 ---
 
@@ -142,14 +188,15 @@ We investigated the four ways of building them
 
 ^
 * Unfamiliar custom templating language
-  * Re-inventing, e.g. $IF/$ELSE conditionals, Partials, Interpolation
+  * Re-inventing, e.g. $IF/$ELSE conditionals, partials, interpolation
+  * No indenting of conditionals allowed - hard to read
 * Unfamiliar syntax describing logic flow
   * Feels as if we’re re-inventing Ruby (we could use `if/else` or `case`)
 * Missing features
-  * Country dropdowns. TODO: Double check this
-  * More development required
+  * Checkbox questions
+  * Custom validation
 * Complexity of parser
-  * Maintenance overhead - Mixture of Parslet rules and parsing using regular expressions
+  * Maintenance overhead - Mixture of Parslet rules and regular expression matching
 
 ---
 
@@ -159,6 +206,10 @@ We investigated the four ways of building them
 
 * Mostly plain old Ruby
 * Fully featured
+
+^
+* Fully featured
+  * Supports existing complicated Smart Answers
 
 ---
 
@@ -173,18 +224,16 @@ We investigated the four ways of building them
 * Single question per page?
 
 ^
-* Fully featured
-  * Supports existing complicated Smart Answers
 * Possibly too flexible?
   * Easy to do the same thing in different ways leading to a lack of consistency across Smart Answers
 * Very non-standard Rails app
   * Handful of standard controller actions but vast majority of the code doesn't follow the Rails way
 * Confusing DSL
   * Multiple ways to do the same thing
+  * Non-obvious order of execution
   * Predicate code
     * e.g. order of arguments in next_node_if
     * Re-inventing Ruby logic
-  * Non-obvious order of execution
 * Page content scattered
   * Pages made up of multiple phrases from different places in YAML file assembled by separate chunk of Ruby code - makes it harder to work out what the page will look like
 * Single question per page?
@@ -245,7 +294,8 @@ We investigated the four ways of building them
 * Capture rendered pages (questions and outcomes) for later comparison
 * We hope they'll be replaced by tests around better factored Smart Answers
 * Can be painful to maintain - slow to run and the diffs can be hard to analyse
-* Jenkins instance
+* Not normally part of main CI build
+* Separate Jenkins instance
 
 ---
 
@@ -362,7 +412,7 @@ We investigated the four ways of building them
 ^
 * Smart Answers aren’t just content - each one is a little app
 * Earlier developer involvement
-* Process is very waterfally
+* Process is very waterfall-y
   * Logic docs
     * Up front design
     * Misses the “why” behind the rules
@@ -463,45 +513,38 @@ We investigated the four ways of building them
 * Ideally end up with a system that makes it easy for Content Team to edit content
 
 ^
-* Hopefully we're leaving the code in a better state
-  * Hopefully reduced maintenance cost in terms of developer
-* There's still lots to do
+* Hopefully we've reduced the maintenance cost for developers
+* But we know there's still lots to do
   * Particularly around content editors ability to edit content
 * If you have any questions after we've gone then please do get in touch - we're keen to see this project succeed
 
 ---
 
-## Business as usual
+## Business as usual changes
 
 ^
-* We'd like to encourage people to continue to make small improvements to the code whenever they have to make business as usual changes
+* We'd like to encourage people to continue to make small improvements to the code whenever they have to make business-as-usual changes
 * Hopefully the regression tests give people confidence to make such changes
-
----
-
-## Examples in flat content
-
-TODO: Insert screenshot of examples table
-
-^ * https://www.gov.uk/guidance/statutory-sick-pay-manually-calculate-your-employees-payments#calculate-ssp-including-rates
-* Examples table could be generated by policy object code or used to check that code
 
 ---
 
 ## Policy as code
 
-TODO: Insert screenshot of tweet/gist
-
 ^
 * People don’t like working on Smart Answers - we think it is/can be really interesting
 * We've enjoyed working on it
-* https://twitter.com/richardjpope/status/620848391006867456
-* Richard's gist - https://gist.github.com/memespring/55f8529f1d9e6dd76632
-* Tom S's gist - https://gist.github.com/tomstuart/7249ad30e56c45d227da
+
+---
+
+![fit](richard-pope-policy-as-code-tweet.png)
+
+---
+
+![fit](tom-stuart-policy-as-code-gist.png)
 
 ---
 
 ## Pub?
 
 ^
-* We'll be at the Princess Louise from 5:00
+* We'll be at the Princess Louise from 5pm
