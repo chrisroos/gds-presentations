@@ -113,7 +113,7 @@
 
 ---
 
-# Recap: What we were asked to do
+## Recap: What we were asked to do
 
 * Reduce maintenance cost of Smart Answers
   * Developer time
