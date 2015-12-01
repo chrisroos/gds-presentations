@@ -6,17 +6,43 @@
 
 ---
 
-![fit](gfr-logo.png)
-
----
-
 # James Mead & Chris Roos
 
 ## @floehopper & @chrisroos
 
 ---
 
-# What are Smart Answers?
+![fit](gfr-logo.png)
+
+---
+
+# What are we going to talk about?
+
+* What are Smart Answers?
+* What were we asked to do?
+* How did we approach the problem?
+* What did we decide to do?
+* What have we done?
+* What would we do next?
+* Conclusion
+
+---
+
+# [fit] What are Smart Answers?
+
+^
+* "Smart answers are a great tool for content designers to present complex information in a quick and simple way. Defining what they are [...] is immaterial - what they do is provide a reusable technical framework to build a quick and simple answer to a complex question."
+* Quote from Lisa Scott's blog post - https://gds.blog.gov.uk/2012/02/16/smart-answers-are-smart/
+
+---
+
+## What do they look like?
+
+^
+* Smart Answers are made up of three types of pages:
+  * Landing page
+  * Question pages
+  * Outcome pages
 
 ---
 
@@ -26,6 +52,10 @@
 
 ![fit](landlord-immigration-check-landing-page.png)
 
+^
+* Includes the title of the Smart Answer, some information about what it's going to help you with, and a "Start now" button.
+* This Smart Answer lets a landlord know whether they need to check that a tenant can legally rent their residential property.
+
 ---
 
 ## Question page
@@ -33,6 +63,18 @@
 ---
 
 ![fit](landlord-immigration-check-question-page.png)
+
+^
+* Includes a _single_ question
+* Multiple question types:
+  * Multiple choice
+  * Checkbox
+  * Country
+  * Date
+  * Money
+  * Salary (weekly, monthly or annual periods)
+  * Postcode
+  * Value - numbers and text
 
 ---
 
@@ -42,11 +84,17 @@
 
 ![fit](landlord-immigration-check-outcome-page.png)
 
+^
+* Displays the answer to the question that this Smart Answer is helping you with.
+* In this case we can see that the landlord doesn't need to check whether a tenant can legally rent their residential property.
+
 ---
 
-# What were we asked to do?
+# [fit] What were we asked to do?
 
 ---
+
+## Goals
 
 * Reduce maintenance cost of Smart Answers
   * Developer time
@@ -55,23 +103,31 @@
 
 ---
 
-# How did we approach the problem?
+# [fit] How did we approach the problem?
 
 ---
 
-## Four implementations
+## Implementations
 
 * Simple Smart Answers
 * Calculators
 * Smartdown Smart Answers
 * Ruby Smart Answers
+* New Smart Answer format?
 
 ^
-We investigated the four ways of building them
+* We investigated the four ways of building Smart Answers
+* We investigated building a new all-encompassing Smart Answer format
 
 ---
 
 ## Simple Smart Answers
+
+---
+
+## Simple Smart Answers
+
+### Overview
 
 * Created in Publisher
 * Read from Content API
@@ -89,14 +145,26 @@ We investigated the four ways of building them
 
 ## Simple Smart Answers
 
-* Advantages
-  * Familiar publishing workflow for content editors
+### Advantages
 
-* Disadvantages
-  * Very limited functionality
-  * Implementation spread over multiple apps/libs
-  * Complex code in Publisher
-  * UI divergence in Frontend
+* Familiar publishing workflow for content editors
+* No developer involvement required
+
+^
+* Uses the same tools and workflow that content editors use to publish other content
+* Content editors can create and maintain Simple Smart Answers without any developer involvement
+
+---
+
+## Simple Smart Answers
+
+### Disadvantages
+
+* Very limited functionality
+* Hard to maintain
+* Implementation spread over multiple apps/libs
+* Complex code in Publisher
+* UI divergence in Frontend
 
 ^
 * Very limited functionality
@@ -104,6 +172,8 @@ We investigated the four ways of building them
   * Routing can only depend on latest response
   * No calculations
   * No country questions
+* Hard to maintain
+  * E.g. Re-ordering questions is very painful
 * Implementation spread over multiple apps/libs
   * publisher -> govuk_content_models -> mongodb
     * SimpleSmartAnswerEdition, SSAE::Node, SSAE::Node::Option
@@ -114,30 +184,58 @@ We investigated the four ways of building them
   * Single EditionsController for all formats (inherited_resources)
   * Combination of nested_form (forked), formtastic-bootstrap, formtastic & custom JS
   * No unit tests for JS, only integration tests (capybara/poltergeist/phantomjs)
+* UI divergence
+  * Looks similar, but not identical, to other Smart Answers
 
 ---
 
 ## Calculators
+
+---
+
+## Calculators
+
+### Overview
 
 * Child Benefit tax calculator
 * Separate Rails app
 * All questions on a single page
 * Dynamic number of questions
 
+^
+* Contains a single Smart Answer - Child benefit tax calculator
+
 ---
 
 ## Calculators
 
-* Advantages
-  * Multiple questions per page?
-* Disadvantages
-  * Maintenance cost of a separate Rails app
-  * UI divergence
+### Advantages
+
+* Multiple questions per page?
 
 ^
 * Multiple questions per page?
   * Although we're not convinced this is necessarily an advantage.
+  * GOV.UK Service design manual says to start with one thing per page, e.g. "One question to answer"
   * Analytics data for Pay leave for parents suggests that switching to a single question per page hasn't made completion rates any worse.
+*  https://www.gov.uk/service-manual/user-centred-design/resources/patterns/form-structure.html#section-3
+
+---
+
+## Calculators
+
+### Disadvantages
+
+* Maintenance cost of a separate Rails app
+* UI divergence
+
+^
+* UI divergence
+  * Looks similar, but not identical, to other Smart Answers
+
+---
+
+## Smartdown Smart Answers
 
 ---
 
@@ -202,12 +300,27 @@ We investigated the four ways of building them
 
 ## Ruby Smart Answers
 
+---
+
+## Ruby Smart Answers
+
+### Overview
+
+* Flows defined using Ruby DSL
+* User interactions via Smart Answers app
+
+---
+
+## Ruby Smart Answers
+
 ### Advantages
 
 * Mostly plain old Ruby
 * Fully featured
 
 ^
+* Mostly plain old Ruby
+  * Easier to understand for developers unfamiliar with the application
 * Fully featured
   * Supports existing complicated Smart Answers
 
@@ -252,13 +365,20 @@ We investigated the four ways of building them
 
 ---
 
-# What we decided to do
+# [fit] What did we decide to do?
 
+---
+
+# What did we decide to do?
+
+* Reduce developer maintenance cost
 * No new Smart Answer format
 * Reduce number of implementations
 * Improve Ruby Smart Answers
 
 ^
+* Reduce developer maintenance cost
+  * We think there's going to be developer involvement for quite some time and it felt like improving the experience would be most beneficial
 * No new Smart Answer format
   * Big bang approach - have to be feature complete before we can migrate all existing Smart Answers to it
 * Reduce number of implementations
@@ -273,16 +393,7 @@ We investigated the four ways of building them
 
 ---
 
-# What we’ve done
-
----
-
-## Improved Fact check process
-
-^
-* Discuss old v2 workflow
-* Git branches
-* Deploy to Heroku - using startup_heroku.sh script
+# [fit] What have we done?
 
 ---
 
@@ -313,6 +424,7 @@ We investigated the four ways of building them
 ^
 * Question definitions & routing logic should only be in Flow class
 * Policy & validation logic should only be in Calculator/Policy class
+  * This policy logic _could_ be exposed via an API - a department might own that API...
 * Presentation logic should only be in ERB templates or helper methods
 * Content should only be in ERB templates
 * We've only done this in a few places
@@ -392,7 +504,16 @@ We investigated the four ways of building them
 
 ---
 
-# What we would do next
+## Improved Fact check process
+
+^
+* Discuss old v2 workflow
+* Git branches
+* Deploy to Heroku - using startup_heroku.sh script
+
+---
+
+# [fit] What would we do next?
 
 ^
 * A selection of things we'd probably choose to work on next, but not necessarily in this order
@@ -501,7 +622,7 @@ We investigated the four ways of building them
 
 ---
 
-# Conclusion
+# [fit] Conclusion
 
 ---
 
@@ -547,4 +668,4 @@ We investigated the four ways of building them
 ## Pub?
 
 ^
-* We'll be at the Princess Louise from 5pm
+* We'll be at the Princess Louise from 5:30pm
