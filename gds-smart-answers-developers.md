@@ -1,5 +1,8 @@
 # Smart Answers
 
+^
+* CJR
+
 ---
 
 # Who are we?
@@ -31,8 +34,9 @@
 # [fit] What are Smart Answers?
 
 ^
-* "Smart answers are a great tool for content designers to present complex information in a quick and simple way. Defining what they are [...] is immaterial - what they do is provide a reusable technical framework to build a quick and simple answer to a complex question."
+* JEM
 * Quote from Lisa Scott's blog post - https://gds.blog.gov.uk/2012/02/16/smart-answers-are-smart/
+* "Smart answers are a great tool for content designers to present complex information in a quick and simple way. Defining what they are [...] is immaterial - what they do is provide a reusable technical framework to build a quick and simple answer to a complex question."
 
 ---
 
@@ -66,7 +70,7 @@
 
 ^
 * Includes a _single_ question
-* Multiple question types:
+* Question types:
   * Multiple choice
   * Checkbox
   * Country
@@ -105,6 +109,9 @@
 
 # [fit] How did we approach the problem?
 
+^
+* CJR
+
 ---
 
 ## Implementations
@@ -117,7 +124,7 @@
 
 ^
 * We investigated the four ways of building Smart Answers
-* We investigated building a new all-encompassing Smart Answer format
+* We considered building a new all-encompassing Smart Answer format
 
 ---
 
@@ -251,7 +258,7 @@
   * Uses Govspeak for question and outcome pages
   * Uses nested bullet points to describe routing/flow logic
 * User interactions via Smart Answers app
-  * Adapter layer
+  * Adapter layer - additional complexity
 
 ---
 
@@ -367,6 +374,9 @@
 
 # [fit] What did we decide to do?
 
+^
+* CJR
+
 ---
 
 # What did we decide to do?
@@ -394,6 +404,9 @@
 ---
 
 # [fit] What have we done?
+
+^
+* JEM
 
 ---
 
@@ -469,7 +482,7 @@
 ^
 * Avoid `eval`ing flow logic
   * Individual Flow subclasses allowed us to get code coverage which helped when generating regression tests
-* Failing fast rather than useless defaults
+* Failing fast rather than unhelpful defaults
   * Start node and Question titles used to fallback to humanised key
   * Undefined State variables defaulted to nil, which made it hard to find bugs due to typos
 
@@ -516,6 +529,7 @@
 # [fit] What would we do next?
 
 ^
+* CJR
 * A selection of things we'd probably choose to work on next, but not necessarily in this order
 
 ---
@@ -623,6 +637,9 @@
 ---
 
 # [fit] Conclusion
+
+^
+* JEM
 
 ---
 
