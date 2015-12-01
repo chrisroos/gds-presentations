@@ -1,12 +1,11 @@
 # Smart Answers
 
+^
+* CJR
+* Can we save questions to the end, please?
 ---
 
 # Who are we?
-
----
-
-![fit](gfr-logo.png)
 
 ---
 
@@ -14,7 +13,21 @@
 
 ---
 
-# What we were asked to do
+![fit](gfr-logo.png)
+
+---
+
+# What are we going to talk about?
+
+* What were we asked to do?
+* What did we decide to do?
+* What have we done?
+* What would we do next?
+* Conclusion
+
+---
+
+# What were we asked to do?
 
 * Reduce maintenance cost of Smart Answers
   * Developer time
@@ -23,7 +36,34 @@
 
 ---
 
-# What we've done
+# What did we decide to do?
+
+* Reduce developer maintenance cost
+* No new Smart Answer format
+* Reduce number of implementations
+* Improve Ruby Smart Answers
+
+^
+* Reduce developer maintenance cost
+  * We think there's going to be developer involvement for quite some time and it felt like improving the experience would be most beneficial
+* No new Smart Answer format
+  * Big bang approach - have to be feature complete before we can migrate all existing Smart Answers to it
+* Reduce number of implementations
+  * Maintenance overhead of having 4 ways to do the same thing
+  * We think it’s better to rationalise the four existing implementations into one and then iteratively improve that
+* Improve Ruby Smart Answers
+  * Majority of existing Smart Answers are already in this format
+  * Better separation of concerns e.g. presentation logic, flow logic & policy logic all mixed up together
+    * This problem wasn't unique to Ruby Smart Answers
+  * Include some of the features of Smartdown that we liked
+  * ADR001 explains why we chose Ruby over Smartdown
+
+---
+
+# What have we done?
+
+^
+* JEM
 
 ---
 
@@ -52,7 +92,7 @@
 
 ---
 
-## Editing ERB templates
+## ERB templates
 
 ```
 vat-payment-deadlines
@@ -72,6 +112,15 @@ vat-payment-deadlines
 
 ^
 * Directory structure
+* This is very similar to the structure of Smartdown
+
+---
+
+![fit](ssp-outcome-github.png)
+
+^
+* ERB tags for logic, loops and partials
+* Possible to edit these using the GitHub web interface - some of you have already done that
 
 ---
 
@@ -88,7 +137,10 @@ vat-payment-deadlines
 
 ---
 
-# What we'd do next
+# What would we do next?
+
+^
+* CJR
 
 ---
 
@@ -133,17 +185,17 @@ vat-payment-deadlines
 
 ---
 
-## Convert Simple Smart Answers to Ruby
+## User interface for editing data
 
 ^
-* Reduce amount of code we have to support
-* Allows us to express the intent of the policy logic better
-* Not right now as it takes control away from content team
-* Also good to bring the calculators app into Smart Answers
+* Particularly for data that changes relatively frequently, e.g. rates, fees, properties of countries
 
 ---
 
 # Conclusion
+
+^
+* JEM
 
 ---
 
@@ -160,7 +212,13 @@ vat-payment-deadlines
 * Although we've made progress towards it, a publishing workflow for Smart Answers is still some way off
 * If you have any questions after we've gone then please do get in touch - we're keen to see this project succeed
 
+---
+
 ## Pub?
 
 ^
-* We'll be at the Princess Louise from 5pm
+* We'll be at the Princess Louise from 5:30pm
+
+---
+
+## Questions?
